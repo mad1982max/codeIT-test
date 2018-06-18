@@ -1,114 +1,7 @@
 'use strict';
-
-let user = {};
 //---------------------------------------------
-window.onload = document.getElementById('send')? start1 : start2;
+window.onload = start;
 
-function start1() {
-    document.getElementById('send').addEventListener('click', begin);
-}
-//--------------begin------------------
-function begin() {
-    if (document.getElementsByClassName('alert')[0]) {
-        deleteAlerts();
-    }
-    getDataFromInputField();
-    if (isValid(user).isValid) {
-        sendReq();
-    } else {
-        showErrField(isValid(user).key);
-    }
-}
-//--------------getDataFromInputField---------------
-function getDataFromInputField() {
-    let name = document.querySelector('input[name="name"]').value;
-    let secondname = document.querySelector('input[name="secondname"]').value;
-    let email = document.querySelector('input[name="email"]').value;
-    let pass = document.querySelector('input[name="pass"]').value;
-    let gender = document.querySelector('select[name="gender"]').value;
-    let isAgree = document.querySelector('input[type="checkbox"]').checked || "";
-    user = {name, secondname, email, pass, gender, isAgree};
-    console.log(user);
-}
-//---------------isValid Data-----------------------
-function isValid(user) {
-    let isValid = false;
-    for (let key in user) {
-        if (user[key].toString().length === 0) return {isValid, key};
-    }
-    return {isValid: !isValid};
-}
-//--------------sendReq()-------------------
-function sendReq() {
-    let params = `name=${user.name}&secondname=${user.secondname}&email=${user.email}&pass=${user.pass}&gender=${user.gender}`;
-    console.log(params);
-
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            showServerAnswer(xhttp.responseText);
-        }
-    };
-    xhttp.open('POST', "http://codeit.pro/codeitCandidates/serverFrontendTest/user/registration", true);
-    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhttp.send(params);
-}
-//---------------showErrField----------------
-function showErrField(fieldName) {
-    let elem = document.querySelector(`input[name = ${fieldName}]`);
-    elem.style.background = '#ffe6e6';
-
-    createModal(`Please, check field "${elem.placeholder || elem.getAttribute('data-attr')}"`);
-}
-//-------------createModal-------------------
-function createModal(message) {
-    let div = document.createElement("div");
-    div.innerHTML = `<div>${message}</div>`;
-    div.className = 'alert';
-    document.body.appendChild(div);
-
-    let elemsColl = document.getElementsByTagName('input');
-    let elemArr = Array.from(elemsColl);
-
-    if (document.getElementsByClassName('alert')) {
-        elemArr.forEach((item, i) => {
-            item.onfocus = deleteAlerts;
-        });
-    }
-}
-//---------------deleteAlerts--------------------
-function deleteAlerts() {
-    let alert = document.getElementsByClassName('alert')[0];
-    document.body.removeChild(alert);
-
-    let inputField = document.querySelectorAll('input');
-    inputField.forEach((item, i) => {
-        item.style.background = '';
-        item.onfocus = null;
-    });
-}
-//------------showServerAnswer---------------------
-function showServerAnswer(data) {
-   let answer = JSON.parse(data);
-   console.log(answer);
-   if (answer.status === "OK") {
-       console.log('ok');
-       document.getElementById('send').removeEventListener('click', begin);
-       document.location.href = "./data.html";
-       window.omload = start2;
-   }
-   else if (answer.status === "Form Error") {
-       let elem = document.querySelector(`input[name = ${answer.field}]`);
-       elem.style.background = '#ffe6e6';
-       createModal(answer.message);
-   }
-   else if (answer.status === "Error") {
-       createModal(answer.message);
-   }
-}
-//----------------------------------
-//--------------page 2--------------
-//----------------------------------
 let initObj = {
     partnersFlag: false,
     graphClickFlag: false,
@@ -120,9 +13,9 @@ let currentComp;
 let dataCompArr;
 let dataNewsArr;
 
-function start2() {
+function start() {
     showLoaders();
-    console.log('start2');
+
     getDataFromServer('http://codeit.pro/codeitCandidates/serverFrontendTest/company/getList')
         .then(data => {
             let removeLoaderArr = ['total', 'list', 'location', 'partners'];
@@ -493,9 +386,9 @@ function DataNewsHandling(data) {
 }
 //---------------buildTemplForNews--------------------
 function buildTemplForNews() {
-    let nest = document.getElementById('news');
-    let templForNews =
-        `<div class = "nest">
+   let nest = document.getElementById('news');
+   let templForNews =
+       `<div class = "nest">
           <div class = 'nest__contImg'>
             <img id = 'icon' class = 'nest__img' src="" alt = "ico" />
           </div>
@@ -512,7 +405,7 @@ function buildTemplForNews() {
             <button id = 'next'><i class="fas fa-chevron-circle-right fa-3x"></i></button>
           </div>
          </div>`;
-    nest.innerHTML = templForNews;
+   nest.innerHTML = templForNews;
 }
 //-----------------showNews--------------------
 function showNews(arr) {

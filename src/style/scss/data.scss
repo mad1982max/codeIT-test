@@ -1,0 +1,411 @@
+$bgc-main: #f2f2f2;
+$bgc-header: #404040;
+$bc-innerTotal: #3399ff;
+$text-color: #595959;
+$alert-bg: #ff8080;
+$border : #808080;
+
+//320, 480, 768, 992, 1200
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $bgc-main;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+/* For mobile phones: */
+.main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 5px auto;
+  background: $bgc-main;
+  display: grid;
+  grid-template-areas: 'total''list''loc''news';
+  grid-gap: 15px;
+  grid-template-columns: 100%;
+  grid-auto-rows: 350px;
+  text-align: center;
+}
+
+.mainWithPartners {
+  grid-template-areas: 'total''list''partners''loc''news';
+}
+
+.main__partners {
+  overflow: auto;
+}
+
+.main__total {
+  grid-area: total;
+}
+
+.main__list {
+  grid-area: list;
+}
+
+.main__partners {
+  grid-area: partners;
+  display: none;
+
+}
+
+.main__location {
+  grid-area: loc;
+}
+
+.main__news {
+  grid-area: news;
+}
+
+.header {
+  position: relative;
+  background: $bgc-header;
+  font-size: 20px;
+  padding: 6px;
+  color: white;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  position: relative;
+  height: 100%;
+}
+
+.loader {
+  position: absolute;
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #666666;
+  border-bottom: 10px solid #666666;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  width: 60px;
+  height: 60px;
+  animation: loader 0.5s linear infinite;
+}
+
+@keyframes loader {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.innerTotal {
+  position: absolute;
+  border: 25px solid $bc-innerTotal;
+  border-bottom-color: #b3e6ff;
+  border-top-color: #b3e6ff;
+  border-radius: 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  width: 200px;
+  height: 200px;
+  line-height: 150px;
+  font-size: 60px;
+}
+
+.list_table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.list_table td {
+  padding: 8px;
+  text-align: left;
+  font-size: 18px;
+}
+
+.list_table tr {
+  cursor: pointer;
+}
+
+.list_table tr:nth-child(even) {
+  background-color: #cce6ff;
+}
+
+.list_table tr:hover {
+  background-color: #ddd;
+}
+
+#chart {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.nest {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 180px 1fr;
+  grid-template-rows: 100px 200px auto;
+  grid-template-areas:
+          'img signatures'
+          'contNews contNews'
+          'contArr contArr';
+}
+
+.nest > * {
+  margin: 5px;
+}
+
+.nest__contImg {
+  grid-area: img;
+  margin: auto;
+  padding: 5px;
+}
+
+.nest__img {
+  max-width: 100%;
+  max-height: 100px;
+}
+
+.nest__signatures {
+  grid-area: signatures;
+  font-size: 15px;
+}
+
+.nest__author {
+  text-align: center;
+  padding: 5px;
+}
+
+.nest__date {
+  text-align: center;
+  padding: 5px;
+}
+
+.nest__contNews {
+  grid-area: contNews;
+}
+
+.nest__headerNews {
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.nest__textNews {
+  margin-top: 20px;
+  padding: 10px;
+  text-align: justify;
+  font-size: 20px;
+}
+
+.nest__contArr {
+  grid-area: contArr;
+  text-align: center;
+}
+
+.nest__contArr button {
+  border: none;
+  height: 90%;
+  outline: 0;
+  margin: 10px 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+#prev i, #next i {
+  background: $bgc-main;
+  color: $text-color;
+}
+
+#returnBtn {
+  right: 10px;
+  top: 10%;
+  position: absolute;
+  height: 80%;
+  background: $bgc-header;
+  text-decoration: none;
+  border: none;
+  outline: 0;
+}
+
+#returnBtn i {
+  background: $bgc-header;
+  color: white;
+}
+
+.main__partners_inner {
+  height: 80%;
+  overflow: auto;
+  position: relative;
+}
+
+.scrollCont {
+  position: relative;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.containerPartn {
+  width: 100px;
+  height: 90%;
+  margin-right: 10px;
+  position: relative;
+  margin-top: 15px;
+  display: inline-block;
+  }
+
+.nameOfPartn {
+  position: absolute;
+  color: white;
+  bottom: 0;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 15px;
+  background: $bc-innerTotal;
+  border-radius: 3px;
+  box-sizing: content-box;
+}
+
+.percentOfPartn {
+  position: absolute;
+  width: 100%;
+  bottom: 40px;
+  height: 35px;
+  background: #00cc00;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  box-sizing: content-box;
+  line-height: 35px;
+  border-radius: 3px;
+}
+
+.percentCont {
+  position: absolute;
+  width: 90%;
+  bottom: 80px;
+  left: 5%;
+}
+
+.pct {
+  margin: 0 auto;
+  height: 1.8px;
+  width: 100%;
+  border-radius: 50%;
+  background: #ff471a;
+}
+
+.sortItem {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  background: $bgc-header;
+  font-size: 15px;
+  z-index: 100;
+}
+
+.sortItem > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btn-group {
+  width: 27px;
+  height: 90%;
+  position: relative;
+}
+
+.btn-group button {
+  width: 30px;
+  background: $bgc-header;
+  text-decoration: none;
+  border: none;
+  float: left;
+  outline: none;
+}
+
+.btn-group button:nth-of-type(1) {
+  margin-top: 0;
+}
+
+.btn-group button i {
+  vertical-align: middle;
+  color: white;
+}
+//----------------------------------------------------------
+//----------------------------------------------------------
+@media only screen and (min-width: 768px) {
+
+  .main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            'total list'
+            'loc news';
+  }
+
+  .mainWithPartners {
+    grid-template-areas: 'total list''partners partners''loc news';
+  }
+
+  .header {
+    font-size: 25px;
+  }
+
+  .list_table td {
+    font-size: 22px;
+  }
+
+  .nest__textNews {
+    font-size: 16px;
+  }
+
+  .nest {
+    grid-gap: 5px;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 230px auto;
+    grid-template-areas:
+          'img contNews'
+          'signatures contArr';
+
+  }
+  .nest__contArr button {
+    margin: 10px 20px;
+  }
+
+  .nest__img {
+    max-height: 200px;
+  }
+
+  .containerPartn {
+    width: 150px;
+  }
+
+  .nameOfPartn {
+    font-size: 25px;
+  }
+
+  .percentOfPartn {
+    font-size: 22px;
+  }
+  .btn-group button:nth-of-type(1) {
+    margin-top: 4px;
+  }
+}
+
+

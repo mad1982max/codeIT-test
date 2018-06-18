@@ -86,6 +86,7 @@ gulp.task('css', css);
 //-----------------js:build---------------------
 function js(done) {
     gulp.src(path.src.js)
+        //.pipe(plumber())
         .pipe(webpackStream(webpackConfig))
         .pipe(gulp.dest(path.build.js))
         .pipe(browserSync.stream());
