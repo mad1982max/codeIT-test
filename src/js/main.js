@@ -30,12 +30,18 @@ function start() {
             DataNewsHandling(data);
         });
 }
-//----------rebuild graph when resizeWind-----------
-function rebuildGraphIfResize(countryLocArr) {
+//----------rebuild when resizeWind-----------
+function rebuildIfResize(countryLocArr) {
     window.onresize = function() {
         if(document.getElementById('chart')) {
             document.getElementById('chart').remove();
             buildGraph(countryLocArr);
+        }
+        if (document.querySelector('.scrollCont')) {
+            let widthPartnCont = window.innerWidth < 768 ? 125: 190;
+            let partners = findPartnArr(currentComp, dataCompArr);
+            let widthScrollCont = partners.length * widthPartnCont;
+            document.querySelector('.scrollCont').style.width = `${widthScrollCont}px`;
         }
     }
 }
@@ -81,7 +87,7 @@ function dataCompHandling(data) {
     bindClickOnList();
     let countryLocArr = buildCountryLocObj(dataCompArr);
     buildGraph(countryLocArr);
-    rebuildGraphIfResize(countryLocArr);
+    rebuildIfResize(countryLocArr);
 }
 //-----------removeLoader---------------
 function removeLoader(arr) {
@@ -172,7 +178,9 @@ function sortNameDown(arr) {
 }
 //-----------buildView--------------------
 function buildView(arr) {
-    let widthScrollCont = arr.length * 125;
+    let widthPartnCont = window.innerWidth < 768 ? 125: 190;
+    console.log(widthPartnCont);
+    let widthScrollCont = arr.length * widthPartnCont;
 
     let nest = document.getElementById('partners');
     let scrollCont = document.createElement('div');
@@ -197,7 +205,7 @@ function buildView(arr) {
     });
     scrollCont.innerHTML = templMain;
     nest.appendChild(scrollCont);
-    
+
     bindSortFunc();
 }
 //-------------showHeaderPartn------------
@@ -246,7 +254,7 @@ function bindSortFunc() {
     let elem4 = document.getElementById('nameDown');
     elem4.onclick = function() { fillPartnerDiv('nameDown') };
 }
-//----------------------------------------------
+//----------------sortPartnArr---------------
 function sortPartnArr(param) {
     let partners = findPartnArr(currentComp, dataCompArr);
     initObj.defaultSortParam = param;

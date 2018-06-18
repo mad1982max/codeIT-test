@@ -165,7 +165,6 @@ body {
 
 .nest > * {
   margin: 5px;
-
 }
 
 .nest__contImg {
@@ -206,10 +205,10 @@ body {
 }
 
 .nest__textNews {
-  //grid-area: textNews;
   margin-top: 20px;
   padding: 10px;
   text-align: justify;
+  font-size: 20px;
 }
 
 .nest__contArr {
@@ -268,8 +267,7 @@ a {
   position: relative;
   margin-top: 15px;
   display: inline-block;
-  //border: 1px solid grey;
-}
+  }
 
 .nameOfPartn {
   position: absolute;
@@ -316,10 +314,9 @@ a {
 
 .sortItem {
   height: 100%;
-  //width: 40%;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 10px;
   background: $bgc-header;
   font-size: 15px;
   z-index: 100;
@@ -328,38 +325,30 @@ a {
 .sortItem > div {
   display: inline-block;
   vertical-align: middle;
-  //line-height: 100%;
-  //border: 1px solid red;
 }
 
 .btn-group {
   width: 27px;
   height: 90%;
   position: relative;
-  //margin-top: 5px;
 }
 
 .btn-group button {
   width: 30px;
-  //position: absolute;
   background: $bgc-header;
   text-decoration: none;
   border: none;
   float: left;
   outline: none;
-  //border: 1px solid yellowgreen;
-  //margin-top: 10px;
 }
 
 .btn-group button:nth-of-type(1) {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .btn-group button i {
   vertical-align: middle;
-  //font-size: 15px;
   color: white;
-  //border: 1px solid yellow;
 }
 //----------------------------------------------------------
 //----------------------------------------------------------
@@ -376,6 +365,18 @@ a {
     grid-template-areas: 'total list''partners partners''loc news';
   }
 
+  .header {
+    font-size: 25px;
+  }
+
+  .list_table td {
+    font-size: 22px;
+  }
+
+  .nest__textNews {
+    font-size: 16px;
+  }
+
   .nest {
     grid-gap: 5px;
     grid-template-columns: 150px 1fr;
@@ -383,6 +384,7 @@ a {
     grid-template-areas:
           'img contNews'
           'signatures contArr';
+
   }
 
   .nest__contArr button {
@@ -391,6 +393,21 @@ a {
 
   .nest__img {
     max-height: 200px;
+  }
+
+  .containerPartn {
+    width: 150px;
+  }
+
+  .nameOfPartn {
+    font-size: 25px;
+  }
+
+  .percentOfPartn {
+    font-size: 22px;
+  }
+  .btn-group button:nth-of-type(1) {
+    margin-top: 4px;
   }
 
 }
